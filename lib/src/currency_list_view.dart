@@ -236,13 +236,10 @@ class _CurrencyListViewState extends State<CurrencyListView> {
     }
 
     // use png in asset for web
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(0),
-      child: Image.asset(
-        currency.flag!.imagePathPNG,
-        package: 'currency_picker',
-        width: 40,
-      ),
+    return Image.asset(
+      currency.flag!.imagePathPNG,
+      package: 'currency_picker',
+      width: 40,
     );
   }
 
