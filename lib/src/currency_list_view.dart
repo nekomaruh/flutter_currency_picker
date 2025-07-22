@@ -186,7 +186,7 @@ class _CurrencyListViewState extends State<CurrencyListView> {
                     const SizedBox(width: 15),
                     if (widget.showFlag) ...[
                       _flagWidget(currency),
-                      const SizedBox(width: 15),
+                      const SizedBox(width: 20),
                     ],
                     Expanded(
                       child: Column(
@@ -227,37 +227,23 @@ class _CurrencyListViewState extends State<CurrencyListView> {
   }
 
   Widget _flagWidget(Currency currency) {
-    if (currency.flag == null) {
+    if (currency.flag == null || currency.isFlagImage) {
       return Image.asset(
         'no_flag.png'.imagePath,
         package: 'currency_picker',
-        width: 27,
-      );
-    }
-
-    if (currency.isFlagImage) {
-      return Image.asset(
-        currency.flag!.imagePath,
-        package: 'currency_picker',
-        width: 27,
+        width: 40,
       );
     }
 
     // use png in asset for web
-    if (kIsWeb) {
-      return Image.asset(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(0),
+      child: Image.asset(
         currency.flag!.imagePathPNG,
         package: 'currency_picker',
-        width: 27,
-      );
-    } else {
-      return Text(
-        CurrencyUtils.currencyToEmoji(currency),
-        style: TextStyle(
-          fontSize: widget.theme?.flagSize ?? 25,
-        ),
-      );
-    }
+        width: 40,
+      ),
+    );
   }
 
   void _filterSearchResults(String query) {
