@@ -118,22 +118,23 @@ class _CurrencyListViewState extends State<CurrencyListView> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const SizedBox(height: 12),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 10,
+          ),
           child: widget.showSearchField
               ? TextField(
                   controller: _searchController,
                   decoration: widget.theme?.inputDecoration ??
                       InputDecoration(
-                        labelText: widget.searchHint ?? "Search",
                         hintText: widget.searchHint ?? "Search",
-                        prefixIcon: const Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: const Color(0xFF8C98A8).withOpacity(0.2),
-                          ),
-                        ),
+                        suffixIcon: const Icon(Icons.search),
+                        filled: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 14.0, horizontal: 16.0),
                       ),
                   onChanged: _filterSearchResults,
                 )
@@ -151,6 +152,7 @@ class _CurrencyListViewState extends State<CurrencyListView> {
                 ),
               ],
               ..._filteredList.map<Widget>((currency) => _listRow(currency)),
+              const SizedBox(height: 10)
             ],
           ),
         ),
@@ -213,7 +215,7 @@ class _CurrencyListViewState extends State<CurrencyListView> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
                   currency.symbol,
                   style: currencySignTextStyle,
@@ -235,7 +237,6 @@ class _CurrencyListViewState extends State<CurrencyListView> {
       );
     }
 
-    // use png in asset for web
     return Image.asset(
       currency.flag!.imagePathPNG,
       package: 'currency_picker',
@@ -262,7 +263,9 @@ class _CurrencyListViewState extends State<CurrencyListView> {
   }
 
   TextStyle get _defaultTitleTextStyle => const TextStyle(fontSize: 17);
+
   TextStyle get _defaultSubtitleTextStyle =>
       TextStyle(fontSize: 15, color: Theme.of(context).hintColor);
+
   TextStyle get _defaultCurrencySignTextStyle => const TextStyle(fontSize: 18);
 }
