@@ -1,3 +1,5 @@
+import 'package:currency_picker/src/extensions.dart';
+
 import 'currency.dart';
 
 class CurrencyUtils {
@@ -13,5 +15,12 @@ class CurrencyUtils {
     final int firstLetter = currencyFlag.codeUnitAt(0) - 0x41 + 0x1F1E6;
     final int secondLetter = currencyFlag.codeUnitAt(1) - 0x41 + 0x1F1E6;
     return String.fromCharCode(firstLetter) + String.fromCharCode(secondLetter);
+  }
+
+  static String getFlagAsset(Currency currency) {
+    if (currency.flag == null || currency.isFlagImage) {
+      return 'no_flag.png'.imagePath;
+    }
+    return currency.flag!.imagePathPNG;
   }
 }
