@@ -143,6 +143,7 @@ class _CurrencyListViewState extends State<CurrencyListView> {
         Expanded(
           child: ListView(
             physics: widget.physics,
+            controller: widget.controller,
             children: [
               if (_favoriteList != null) ...[
                 ..._favoriteList!.map<Widget>((currency) => _listRow(currency)),

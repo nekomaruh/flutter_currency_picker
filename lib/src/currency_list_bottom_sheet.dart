@@ -27,56 +27,60 @@ void showCurrencyListBottomSheet({
   showModalBottomSheet<dynamic>(
     context: context,
     isScrollControlled: true,
-    shape: shape,
     useRootNavigator: useRootNavigator,
+    shape: shape,
     backgroundColor: theme?.backgroundColor,
     showDragHandle: showDragHandle,
-    builder: (_) => _builder(
-      context,
-      onSelect,
-      favorite,
-      currencyFilter,
-      searchHint,
-      physics,
-      showSearchField,
-      showFlag,
-      showCurrencyName,
-      showCurrencyCode,
-      theme,
+    builder: (_) => DraggableScrollableSheet(
+      initialChildSize: 0.9,
+      minChildSize: 0.5,
+      maxChildSize: 0.95,
+      expand: false,
+      builder: (context, scrollController) {
+        return _builder(
+          context,
+          onSelect,
+          favorite,
+          currencyFilter,
+          searchHint,
+          physics,
+          showSearchField,
+          showFlag,
+          showCurrencyName,
+          showCurrencyCode,
+          theme,
+          scrollController, // 👈 nuevo parámetro
+        );
+      },
     ),
   );
 }
 
 Widget _builder(
-  BuildContext context,
-  ValueChanged<Currency> onSelect,
-  List<String>? favorite,
-  List<String>? currencyFilter,
-  String? searchHint,
-  ScrollPhysics? physics,
-  bool showSearchField,
-  bool showFlag,
-  bool showCurrencyName,
-  bool showCurrencyCode,
-  CurrencyPickerThemeData? theme,
-) {
-  final device = MediaQuery.of(context).size.height;
-  final statusBarHeight = MediaQuery.of(context).padding.top;
-  final height = theme?.bottomSheetHeight ??
-      device - (statusBarHeight + (kToolbarHeight / 1.5));
-  return SizedBox(
-    height: height,
-    child: CurrencyListView(
-      onSelect: onSelect,
-      searchHint: searchHint,
-      showSearchField: showSearchField,
-      showFlag: showFlag,
-      showCurrencyName: showCurrencyName,
-      showCurrencyCode: showCurrencyCode,
-      favorite: favorite,
-      currencyFilter: currencyFilter,
-      physics: physics,
-      theme: theme,
-    ),
+    BuildContext context,
+    ValueChanged<Currency> onSelect,
+    List<String>? favorite,
+    List<String>? currencyFilter,
+    String? searchHint,
+    ScrollPhysics? physics,
+    bool showSearchField,
+    bool showFlag,
+    bool showCurrencyName,
+    bool showCurrencyCode,
+    CurrencyPickerThemeData? theme,
+    ScrollController scrollController, // 👈 nuevo parámetro
+    ) {
+  return CurrencyListView(
+    onSelect: onSelect,
+    searchHint: searchHint,
+    showSearchField: showSearchField,
+    showFlag: showFlag,
+    showCurrencyName: showCurrencyName,
+    showCurrencyCode: showCurrencyCode,
+    favorite: favorite,
+    currencyFilter: currencyFilter,
+    physics: physics,
+    controller: scrollController, // 👈 pasa el controller
+    theme: theme,
   );
 }
