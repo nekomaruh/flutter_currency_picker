@@ -120,8 +120,8 @@ class _CurrencyListViewState extends State<CurrencyListView> {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(
-            left: 20,
-            right: 20,
+            left: 15,
+            right: 15,
             top: 20,
             bottom: 10,
           ),
@@ -129,13 +129,14 @@ class _CurrencyListViewState extends State<CurrencyListView> {
               ? TextField(
                   controller: _searchController,
                   autofocus: true,
+                  autocorrect: false,
                   decoration: widget.theme?.inputDecoration ??
                       InputDecoration(
                         hintText: widget.searchHint ?? "Search",
                         suffixIcon: const Icon(Icons.search),
                         filled: true,
                         contentPadding: const EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 14.0),
+                            vertical: 15.0, horizontal: 15.0),
                       ),
                   onChanged: _filterSearchResults,
                 )
@@ -149,7 +150,7 @@ class _CurrencyListViewState extends State<CurrencyListView> {
               if (_favoriteList != null) ...[
                 ..._favoriteList!.map<Widget>((currency) => _listRow(currency)),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: EdgeInsets.zero,
                   child: Divider(thickness: 1),
                 ),
               ],
