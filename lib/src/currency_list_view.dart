@@ -128,13 +128,14 @@ class _CurrencyListViewState extends State<CurrencyListView> {
           child: widget.showSearchField
               ? TextField(
                   controller: _searchController,
+                  autofocus: true,
                   decoration: widget.theme?.inputDecoration ??
                       InputDecoration(
                         hintText: widget.searchHint ?? "Search",
                         suffixIcon: const Icon(Icons.search),
                         filled: true,
                         contentPadding: const EdgeInsets.symmetric(
-                            vertical: 14.0, horizontal: 16.0),
+                            vertical: 14.0, horizontal: 14.0),
                       ),
                   onChanged: _filterSearchResults,
                 )
@@ -216,7 +217,7 @@ class _CurrencyListViewState extends State<CurrencyListView> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
                   currency.symbol,
                   style: currencySignTextStyle,
